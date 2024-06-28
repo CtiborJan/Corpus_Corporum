@@ -1,0 +1,97 @@
+var url_resolver=true;
+class cls_url_resolver
+{
+    constructor(url)
+    {
+        this.browser_opened=false;
+        var url_params=new URLSearchParams(url.search);
+        this.requested_path="";
+        
+        
+        if (url_params.get("c")!=null)
+        {   
+            var c=url_params.get("c");
+            if (c.match(/^cps_/)==null)
+                c="cps_"+c;
+//             navigate_request=new CustomEvent('navigate_request',{
+//                 detail:{path:c,path_to_focus:""}});
+            this.requested_path=c;
+        }
+        else if (url_params.get("w")!=null)
+        {
+//             navigate_request=new CustomEvent('navigate_request',{
+//                 detail:{path:url_params.get("w"),path_to_focus:""}});
+            this.requested_path=url_params.get("w");
+        }
+        else if (url_params.get("tabelle")!=null)
+        {
+            //Perpetuus_Turonensis_cps2
+//             navigate_request=new CustomEvent('navigate_request',{
+//                 detail:{path:"tabelle:"+url_params.get("tabelle"),path_to_focus:""}});
+            this.requested_path="tabelle:"+url_params.get("tabelle");
+        }        
+        else if (url_params.get("app")=="home" || url.pathname=="/home")
+        {
+            this.open_homepage();            
+        }
+        else if (url_params.get("app")=="browser" || url.pathname=="/browser" || url_params.get("w")!=null)
+        {
+            this.open_browser();
+        }
+        else if (url_params.get("app")=="dictionaries" || url.pathname=="dictionaries")
+        {
+            this.open_dictionaries();
+        }
+        else 
+        {
+            this.open_homepage();
+        }
+        
+        if (this.requested_path!="")
+        {
+            this.open_browser(this.requested_path);
+            //document.getElementById("base").dispatchEvent(navigate_request);
+        }
+        
+        if (url_params.get("text")!=null)
+        {
+            var open_text_request=new CustomEvent('load_text_request',{
+                detail:{path:url_params.get("text"),path_to_focus:url_params.get("focus")}});
+            document.getElementById("base").dispatchEvent(open_text_request);
+        }
+    }
+    open_homepage=()=>
+    {
+        var module;
+        module=new cls_mod_home(B.slot);           
+        B.slot.activate_module(0);  
+    }
+    open_dictionaries=()=>
+    {
+        var module;
+        module=new cls_mod_dictionaries(B.slot);           
+        B.slot.activate_module(0);
+    }
+    open_browser=(path)=>
+    {
+        if (this.browser_opened==false)
+        {
+            this.browser_opened=true;
+            var slot2=B.slot.add_slot(["flex","flex_vertical"],"4");
+            var slot3=B.slot.add_slot(["flex","flex_vertical"],"2");
+            var slot4=slot3.add_slot(["flex","flex_vertical"]);
+            //slot3.add_slot(["flex","flex_vertical"]);
+            var module;
+            //module=new cls_mod_home(B.slot);
+
+            module=new cls_mod_browser(slot2,path);
+            module=new cls_mod_text_viewer(slot2,1);
+            module=new cls_db_search(slot4,"fd",1);
+            
+            B.main_slot=slot2;
+            //module=new cls_image_viewer(fslot);
+            
+            slot2.activate_module(0);  
+        }
+    }
+}

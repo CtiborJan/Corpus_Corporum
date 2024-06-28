@@ -1,0 +1,96 @@
+orth {font-weight:bold;padding-left:10px;}
+gramGrp {display:inline;}
+superEntry entryFree {display:inline;}
+entryFree form {display:inline;}
+entryFree div 
+{
+    xdisplay:inline;
+    padding-left:5px;
+}
+
+entryFree xhead
+{
+    font-weight:bold;
+}
+
+e
+{
+    display:block;
+    font-size:120%;
+    cursor:pointer;
+    margin-top:4px;
+    margin-bottom:4px;
+    border:1px solid var(--highlight3);
+    line-height:3ex;
+    max-height:3ex;
+    overflow:hidden;
+    padding:3px;
+}
+e:hover
+{
+    border:1px solid var(--highlight2);
+}
+e l
+{
+    margin-right:20px;
+    font-weight:bold;
+}
+e t
+{
+    max-width:50ch;
+}
+
+
+
+span.mod_Dict_truncated_dictionary_entry
+{
+    position:relative;
+    overflow:hidden;
+    max-width:150ch;
+    max-height:18ex;
+    line-height:3ex;
+    text-overflow:ellipsis;
+    margin-bottom:10px;
+}
+span.mod_Dict_full_dictionary_entry
+{
+    line-height:3ex;
+    margin-bottom:10px;
+}
+.app_Dict_truncated_dictionary_entry
+{
+    cursor:pointer;
+    margin:5px 5px 5px 20px;
+    padding:2px;
+    overflow:hidden;
+    max-height:6ex;
+    line-height:3ex;
+    text-overflow:ellipsis;
+}
+info_btn.mod_Dict_show_full_entry
+{
+    padding:3px 10px 3px 10px;
+    max-height:3ex;
+    font-size:75%;
+    position:absolute;
+    bottom:0px;
+    right:0px;
+    line-height:2ex;
+}
+
+.app_dict_show_list_lbl_hide:after
+{
+    content: " Hide ";
+}
+.app_dict_show_list_lbl_show:after
+{
+    content: " Select dictionaries ";
+}
+.app_dict_show_MA_lbl_hide:after
+{
+    content: " Hide ";
+}
+.app_dict_show_MA_lbl_show:after
+{
+    content: " Show morph. analasis ";
+}

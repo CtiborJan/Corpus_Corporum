@@ -1,0 +1,171 @@
+var mod_home=true;
+class cls_banner_carousel
+{
+    constructor(parent,w=0,h=0)
+    {
+        if (w==0)
+            this.carousel=div("width_100p v_margin_10 relative",parent);
+        
+       
+        this.transitional=create_element("img","absolute width_100p carousel_transitional",this.carousel);
+        this.transitional.style.left="0px";
+        this.transitional.style.top="0px";
+        
+        this.banner=create_element("img","width_100p",this.carousel);
+        
+        this.bar=div("absolute width_100p height_100",this.carousel);
+        this.bar.style.zIndex="10";
+        this.bar.style.backgroundColor="rgba(255,255,255,0.8)";
+        this.bar.style.bottom="0px";
+        this.bar_title=div("font_166p bold h_padding_5",this.bar);
+        
+        this.bar_title.style.color="var(--highlight2)";
+        this.bar_title.style.margin="auto";
+        this.bar_description=div("padding_5",this.bar);
+        
+        this.banners=Array();
+        
+        this.ac_slide_index=0;
+        this.transition_status=0;
+    }
+    
+    add_banner(image_src,title,description,position=-1)
+    {
+        var b=create_element("img","display_none",this.carousel);
+        b.src=image_src;
+        var b_obj={img:b,title:title,description:description}
+        this.banners.push(b_obj);
+    }
+    
+    start_slideshow(index=0,interval=8000)
+    {
+        this.slide(index);
+        window.setInterval(this.interval_ellapsed,interval);
+    }
+    slide(index=-1)
+    {
+        if (index=-1)
+            index=this.ac_slide_index+1;
+        if (index>=this.banners.length)
+            index=0;
+        
+        this.transitional.src=this.banners[this.ac_slide_index].img.src;
+        this.transitional.style.zIndex="2";
+        
+        
+        this.ac_slide_index=index;
+        
+        this.banner.src=this.banners[index].img.src;
+        this.start_transition();
+        
+        this.bar_title.innerHTML=this.banners[index].title;
+        this.bar_description.innerHTML=this.banners[index].description;
+    }
+    interval_ellapsed=(e)=>
+    {
+        this.slide();
+    }
+    start_transition()
+    {
+        this.transition_status=1;
+        this.transitional.style.opacity="1";
+        window.setTimeout(this.transition,10);
+    }
+    transition=(e)=>
+    {
+        this.transition_status-=0.01;
+        if (this.transition_status>=0)
+        {
+            this.transitional.style.opacity=this.transition_status;
+            window.setTimeout(this.transition,10);
+        }
+        
+    }
+}
+class  cls_mod_home extends cls_mod
+{
+    
+    constructor(parent_slot)
+    {
+        super(parent_slot);
+        
+        var about=
+        "<p>The site mlat.uzh.ch is a Latin text (meta-)repository and tool under way of development. Users should take into account that some functions do not yet work satisfactorily. This Corpus Córporum is being developed at the University of Zurich under the direction of Ph. Roelli, Institute for Greek and Latin Philology. The project uses exclusively free and open software and is non-commercial. Our main goals are:</p><ul><li>To provide a platform into which standardised (TEI) xml-files of Latin texts can be loaded (if you would like to share your texts, please contact us) and downloaded (unless copyrights or the texts&apos; providers restrict this).</li><li>To make these texts searchable in complex manners (including proximity search and lemmatised search). Search results, wordlists and concordances can be generated for the current text level at the bottom left of the page (we use the open-source software Sphinx).</li><li>To be able to use the platform to publish Latin texts online (cf. the Richard Rufus Project&apos;s corpus).</li><li>Texts may be downloaded as TEI xml or txt-files for non-commercial use (in snippets also as pdf) and can thus be reused by other researchers.</li></ul><p>The texts are divided into corpora on a specific topic that can be searched and studied separately: the first such corpus consists of ten translations of Aristotle&apos;s Physica into Latin. They were used to study how technical Greek language could be translated into Latin. Word frequency lists are also on the server. This study was published in two papers.</p><h2>Dictionaries</h2><p>In order to facilitate online reading, Latin words in the text can be resolved to their lemma form by clicking them (powered by Perseus and TreeTagger with Gabriele Brandolini&apos;s Latin data [here the tag-set used], additionally also by the Comphistsem&apos;s [University of Frankfurt, led by Prof. Bernhard Jussen] wordlist). Entries in the following dictionaries are then displayed: Georges (Latin-German), Lewis and Short (Latin-English), Du Cange (mediaeval Latin), Schütz (scholastic Latin), Graesse (toponomastics); within University of Zurich&apos;s IP range also Niermeyer can be consulted. For Greek LSJ (1940) and Pape are available but do not yet work very well.</p><p>These dictionaries may be used as a search engine in your internet browser. In order to do this right click in Chromium (and Google Chrome) the URL box and choose &apos;edit search engines&apos;. There add a new engine by filling in: Corpus Corporum / cc (or another shortcut of your choice) / http://mlat.uzh.ch/MLS/info_frame.php?w=%s In Firefox this can only be done by adding an add-on that allows users to add custom search engines.</p><h2>License</h2><p>The data we transcribed ourselves (including some editions by Philipp Roelli) is published under Creative Commons Share-Alike and may thus be reused freely (but non-commercially) as long as the source is indicated. Most of the texts present here, however, stem from various online sources. As far as we could determine they are either in the public domain or their use was granted us by their owners. If you believe to have rights on a text erroneously published here, please contact us and we will delete it or restrict its access. An article in Archivum Latinitatis Medii Aevi (ALMA) 72 (2014) explains the project and its background more fully.</p><p>Administrator of this server is Dr. Philipp Roelli, the application code for the first version was developed by Max Bänziger. The current version 2 is written by Jan Ctibor (University of Prague). We keep improving it and adding new features to it. To contact us write to turicense@gmail.com. Last updated January 2022.</p><h2>Collaboration</h2><p>This project would not be possible without collaboration with many institutions, especially with the Institut de Recherche et d&apos;Histoire des Textes (CNRS, Paris). For our lemmatisation and dictionary display we collaborate with the Perseus Digital Library, the Ecole nationale des chartes (Electronic Du Cange Glossarium, Paris), the Latinitatis medii aevi lexicon Bohemorum (Akademie Věd České Republiky, thanks to Pavel Nývlt) and Comphistsem from Frankfurt University (thanks to Tim Geelhaar). Besides we are in contact with mirabile (linking of author and text information), Collatinus and the COST initiative Towards a Medieval Latin Digital Library. The main sources of our Latin texts are:</p><table><th><tr><td>team leader</td><td>university</td><td>project</td><td>used in corpus</td></tr></th><tr><td>Gregory Crane</td><td>Leipzig</td><td>OpenGreekAndLatin</td><td>2 and 19</td></tr><tr><td>Gregory Crane</td><td>Tufts</td><td>Perseus</td><td>5</td></tr><tr><td>Isabelle Draelants</td><td>IRHT, Paris</td><td>SourcEncyMe</td><td>20</td></tr><tr><td>Alessandro Garcea</td><td>Sorbonne, Paris</td><td>CGL</td><td>13</td></tr><tr><td>Martina Hartmann</td><td>MGH, München</td><td>dMGH</td><td>22</td></tr><tr><td>Neven Jovanović</td><td>Zagreb</td><td>CroALa</td><td>8</td></tr><tr><td>Martin Korenjak</td><td>Innsbruck</td><td>Nova scientia</td><td>25</td></tr><tr><td>Peter King</td><td>Toronto</td><td>Peter King’s Website</td><td>10</td></tr><tr><td>Wilhelm Kühlmann</td><td>Mannheim</td><td>CAMENA</td><td>9</td></tr><tr><td>Agostino Paravicini Bagliani</td><td>SISMEL, Firenze</td><td>mirabile testi, Edizioni del Galluzzo</td><td>24</td></tr><tr><td>Emilio Russo</td><td>Sapienza, Roma</td><td>Biblioteca Italiana</td><td>6</td></tr><tr><td>Francesco Stella</td><td>Siena et al.</td><td>ALIM</td><td>21</td></tr><tr><td>Raffaella Tabacco</td><td>Piemonte Orientale</td><td>digilibLT</td><td>16</td></tr><tr><td>Rega Wood</td><td>Indiana</td><td>Richard Rufus Project</td><td>7</td></tr></table><h2>Funding</h2><p>We heartily thank for their generous support of this project: the University of Zurich&apos;s Chair of Mediaeval Latin Studies (especially Prof. Dr. Carmen Cardelle de Hartmann) for the initial funding and providing of the server hardware, and COST (Action IS1005) in conjunction with the State Secretariat for Education, Research and Innovation (Grant C12.0053) who kindly fund the project&apos;s further development from 2013 to 2015.</p><p>More detailled credits for the transcribed texts can be found on the top page of their respective Corpus, or at a text&apos;s initial page.</p>";
+        
+        this.display_only_my_slot=true;
+        this.taskbar_text="3";
+        this.taskbar_color="black";
+        this.taskbar_bckg_color=taskbar_btn_color;
+        this.module_name="Home";
+        this.module_dscription="Homepage of Corpus Corporum";
+        this.label="";
+        this.img_strip=div("flex margin_auto",this.module_container);
+        
+        this.img_cc_c=div("CC_imgx width_66p height_m_200",this.img_strip);
+        var CC_img=create_element("img","width_100p height_m_200 object-fit_contain",this.img_cc_c);
+        CC_img.src="cc_modules/CC.png";
+        //this.img_cc=("CC_img width_100p",this.img_cc_c);
+        this.img_uzh_c=div("width_34p",this.img_strip);
+        //this.img_uzh_c.style.backgroundColor="var(--background9)";
+        var UZH_container=div("margin_auto absolute",this.img_uzh_c);
+        UZH_container.style.maxWidth="300px";
+        UZH_container.style.right="0px";
+        var UZH_img=create_element("img","width_100p height_m_200 object-fit_contain width_m_100p",UZH_container);
+        UZH_img.src="cc_modules/uzh_logo.png";
+        
+        this.mp=div("margin_20",this.module_container);
+        
+       
+        
+        this.flex_container=div("flex_row width_100p",this.mp);
+        
+        
+        this.about=div("flex_grow_3 width_66p margin_10",this.flex_container);
+        
+        this.lbl_welcome=div("font_120p b_margin_20 text_align_center",this.about,"Welcome to the Corpus Corporum project, repository of Latin texts.<br/>");
+        this.btn_cont=div("flex_row margin_auto relative",this.about);
+        this.btn_cont.style.width="max-content";
+        this.btn_start_browsing=button("font_166p",this.btn_cont," &nbsp; Browse the database &nbsp; ",true,this.btn_start_browsing_clicked);
+        /*this.btn_dictionary_module=button("font_120p",this.btn_cont," &nbsp; Open the dictionaries &nbsp; ");
+        this.btn_dictionary_module=button("font_120p",this.btn_cont," &nbsp; Open biblical synopsis &nbsp; ");*/
+        
+        
+       /* this.carousel=div("width_100p v_margin_10 relative",this.about);
+       
+        this.carousel=new cls_banner_carousel(this.about);
+        this.carousel.add_banner("cc_modules/patrologia.jpg","Corpus 2: Patrologia Latina","Complete Minge's Patrologia Latina containing more than 5000 works and 90'000'000 words.");
+        this.carousel.add_banner("cc_modules/mirabile.jpg","Corpus 24: Mirabile","Texts we have from Mirabile.");
+        this.carousel.start_slideshow();*/
+        
+        create_element("h2","",this.about,"About the <em>Corpus Corporum</em> project");
+        div("b_margin_10",this.about, about)
+        
+        div("t_margin_30 font_75p",this.about,"Please report bugs to turicense AT gmail.com");
+        
+        this.news=div("flex_grow_1 width_34p padding_10",this.flex_container);
+        create_element("h2","",this.news,"What's new?");
+        div("b_margin_10",this.news, "<strong>22.12.2021:</strong> Lauch of a completely new version of <em>Corpus Corporum</em>. Some features (such as the synoptic Bible or POS-searches) are not yet implemented. We are happy to receive bug reports and feedback from 1.2.2022 onward (turicense@gmail.com).");
+        div("b_margin_10",this.news, "<strong>22.12.2021:</strong> The Mirabile Corpus was added (our special thanks to SISMEL Firenze!). The <i>Corpus Corporum</i> now contains over 170 M words.");
+        div("b_margin_10",this.news, "<strong>22.3.2019:</strong> reached 160 million words.");
+        div("b_margin_10",this.news, "<strong>1.3.2018:</strong> we have reached 150 million words. Several new corpora are in preparation.");
+        div("b_margin_10",this.news, "<strong>21.6.2017:</strong> new dictionary added from our Czech colleagues: Latinitatis medii aevi lexicon Bohemorum (www.ics.cas.cz/en), thanks to Pavel Nývlt!");
+        div("b_margin_10",this.news, "<strong>19.10.2016:</strong> new part of speech dependent search option, for details cf. HELP (left bottom frame).");
+        div("b_margin_10",this.news, "<strong>10.5.2016:</strong> new dictionary added: Gaffiot, Dictionnaire latin-français. Thanks to G. Gréco, M. De Wilde, B. Maréchal, K. Ôkubo!");
+        div("b_margin_10",this.news, "<strong>2.5.2016:</strong> links to author pages in Mirabile (SISMEL Firenze) added.");
+        div("b_margin_10",this.news, "<strong>2.4.2016:</strong> author data and links to VIAF, DNB and Wiki added.");
+        div("b_margin_10",this.news, "<strong>4.2.2016:</strong> new feature: synoptic Bible in Hebrew, Greek, Latin and English.");
+        
+        
+        
+        this.my_index=this.parent_slot.add_module(this)-1;
+        //this.parent_slot.set_label("Browsing the database");
+    }
+    btn_about_click=(e)=>
+    {
+        window.open("about.html","_blank");
+    }
+    btn_start_browsing_clicked=(e)=>
+    {
+         window.location.href="browser"
+    }
+}

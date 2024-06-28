@@ -1,0 +1,97 @@
+/*@import url('../fonts/NotoSanshddttps://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');*/
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../fonts/NotoSans/NotoSans-Italic.woff2') format('woff2'),
+        url('../fonts/NotoSans/NotoSans-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../fonts/NotoSans/NotoSans.woff2') format('woff2'),
+        url('../fonts/NotoSans/NotoSans.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../fonts/NotoSans/NotoSans-BoldItalic.woff2') format('woff2'),
+        url('../fonts/NotoSans/NotoSans-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url('../fonts/NotoSans/NotoSans-Bold.woff2') format('woff2'),
+        url('../fonts/NotoSans/NotoSans-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Serif';
+    src: url('../fonts/NotoSerif/NotoSerif-Italic.woff2') format('woff2'),
+        url('../fonts/NotoSerif/NotoSerif-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Serif';
+    src: url('../fonts/NotoSerif/NotoSerif-Bold.woff2') format('woff2'),
+        url('../fonts/NotoSerif/NotoSerif-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Serif';
+    src: url('../fonts/NotoSerif/NotoSerif-BoldItalic.woff2') format('woff2'),
+        url('../fonts/NotoSerif/NotoSerif-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Serif';
+    src: url('../fonts/NotoSerif/NotoSerif.woff2') format('woff2'),
+        url('../fonts/NotoSerif/NotoSerif.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root
+{
+    --old-CC:rgb(255,252,235);
+    --background1:white;
+    --background2:rgb(86,88,82);
+    --background3:rgb(240,240,240);
+    --background4:rgb(251,251,251);
+    --background5:rgb(209,111,84);
+    --background5-03:rgba(209,111,84,0.3);
+    --background5-01:rgba(209,111,84,0.1);
+    --background7:rgb(200,94,65);
+    --background8:rgb(209,111,84);
+    --background9:rgb(218,127,103);
+    --slot-background:white;
+    --highlight1:lightgray;
+    --highlight2:rgb(161,61,16);
+    --highlight3:rgb(234,188,174);
+    --highlight4:rgb(51,57,63);
+    --highlight5:rgb(127,127,127);
+    --highlight6:blue;
+    --taskbar_width:45px;
+    --lightergray:rgb(240,240,240);
+    --lightergray2:rgb(230,230,230);
+}
