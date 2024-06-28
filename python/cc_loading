@@ -1,0 +1,4 @@
+#!/bin/bash
+wd=$(pwd) #get context
+dir="$( dirname "$0" )" 
+python3 "$dir"/cc_loading.py "$wd" "$@"

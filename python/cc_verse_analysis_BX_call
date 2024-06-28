@@ -1,0 +1,4 @@
+#!/bin/bash
+wd=$(pwd) #get context
+dir="$( dirname "$0" )" 
+cat /var/www/html/var/verse_analysis.xml | cc_verse_analysis -x --input xml
