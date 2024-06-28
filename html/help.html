@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="cc_modules/colors.css">
+    <link rel="stylesheet" href="cc_modules/main.css">
+    <link rel="stylesheet" href="cc_modules/primitives.css">
+    <title>Corpus Corporum search and dictionary help</title>
+  </head>
+  <body>
+  <div style="max-width:1000px">
+    <h1>How to Search</h1>
+<p>Use the button "Full-text search" or the enter key on your computer to start a full-text search. In the box below, you can choose, whether the search should be performed in the whole database, or on the current level opened in the browser. The further options are:</p>
+<h2>Search</h2>
+
+<p>We use Sphinx to search the database, which makes queries very fast. The main functions are at present:</p>
+<ul>
+    <li>A B ... finds A and B (and any number of words) within one sentence</li>
+    <li>A >> B (strictly ordered search) finds sentences in which A occurs before B</li>
+    <li>Operators - for NOT and | for OR may be used, also within brackets, except for the following three (four) types of searches. Example: -trinit* (pater|filius)</li>
+    <li>"A B ..." (phrase search) finds the exact phrase. Example: "arma virumque cano"</li>
+    <li>"A B ..."~5 (proximity search) finds words A and B etc. within a distance of maximally 5 (or any number of) words. Example: "deus diabolus"~3</li>
+    <li>"A B ..."~1 this special case finds words A and B etc. directly following each other but in arbitrary sequence. Example: "dicit dominus ei"~1</li>
+    <li>"A B ..."/5 (quorum search) finds 5 (or any number of) words among A and B etc. within one sentence. Example: "gula luxuria avaritia ira acedia invidia superbia vanagloria fornicatio gastrimargia tristitia cenodoxia"/7 yields hits of lists of names for “seven deadly sins”</li>
+    <li>A NEAR/5 B may be used as proximity search syntax that allows operators and brackets. Example: (anima NEAR/3 (beata|felix|perfecta)) immortal* Dei</li>
+    <li>* a wildcard may be used at the end of a word which must contain at least 4 characters, e.g. scien*</li>
+    <li>$ denotes the end of a sentence. example: ergo$</li>
+    <li>"Verse only" This option constrains searches to verse only (including metric and rhythmic lines)</li>
+    </ul>
+
+<h2>Lemmatised search</h2>
+
+<p>If this box is ticked, all search terms entered will be interpreted as lemmata. All of the above search options are still available. Verbs must be entered as 1st person singular forms. Example "facio ago" will find syntagmata like facit agendum. Lemmatised search is currently only available for Latin words (not Greek or Hebrew ones).
+Time constrained search</p>
+
+<p>Searches on all levels may be constrained to a time period. It is possible to use only one limit (ante quem or post quem). Years before Christ may be entered as e.g. -56 or 56BC. Caution: only 83% of our texts currently have a time tag. Those that do not have one (all of them in the PL), are simply omitted in time-dependent searches. By default results will be ordered chronologically (if at least one time constraint is present), but on the result page they may be re-ordered alphabetically.</p>
+
+<!--POS search
+
+It is possible to search lemmata AND parts of speech in their vicinity. Examples of the syntax:
+
+    lucror!dat~2 finds datives at a distance of max. 2 words of the lemma lucror
+    lucror!dat~r2 the same but the dative must be after lucror
+    lucror!dat~l2 the same but the dative must be before lucror
+    amo!inf the lemma itself must be an infinitive, in this case amare and amari are found
+
+The following part of speech abbreviations are in use: ESSE:IND; ESSE:SUB; ESSE:INF; V:IND; V:SUB; V:INF; V:GER; V:GED; V:PTC:nom; V:PTC:acc; V:PTC:abl; V:PTC; V:SUP:acc; V:SUP:abl; V:IMP; PRON; PRON:DEM; PRON:POSS; PRON:REL; PRON:INDEF; PRON:DET; N:nom; N:dat; N:gen; N:loc; N:acc; N:abl; N:voc; ADJ:NUM; CONJ:C; CONJ:S; N:PR; ADJ; ADJ:COM; ADJ:SUP; ADJ:abl; ADV; PREP; INTER; ABBR. Their use is case insensitive. The parts before and after ":" may be used together (lucror!V:ind~2) or alone (lucror!ind~2). Note that V and ESSE are mutually exclusive, i.e. ESSE is not treated as a normal verb. Tagging errors must be expected, results should always be checked manually! These searches take longer than usual. Add p (after numbers) or -p (after letters) to see an output including the POS tagging of the search result. E.g. anima!dat-p.
+
+This POS feature is only in a β state.
+Concordances
+
+Concordances work for single words. The wildcard * can be used at the end of the search term (e.g. matr*). * here has the meaning 'no or any number of characters'. No spaces are allowed in the search term.
+Wordlists
+
+The search term (e. g. 'ama') produces a list of all words beginning with the search term ('amabilis', 'amandas', 'amant' etc.) and their number of occurrences. Wildcards are not allowed. Words that occur only once in the entire database are likely to be spelling mistakes.
+The second search box "Dictionary display"-->
+
+<h2>Dictionaries</h2>
+This box can be used to look up a Latin or Greek (UTF8) word in all the dictionaries used in the CC. This function does the same thing as clicking a word in a text, but for a manually entered word. For searching Greek words, you can enter a word in the Greek alphabet, or use the prefix "g:" and a word transcribed to the Latin alphabet (without accents and breathing marks), e.g.: "g:aaatos" = "ααατος".
+  </body>
+</html>
+
+<h1 id="biblical_synopsis"><a href="bible">Synoptic Bible</a></h1>
+<p style="color:gray">N. B.: This feature is still a betaversion!</p>
+<p>The Synoptic Bible allows you to view correspondent passages from different versions of the Bible availible in CC: Hebrew Bible (heb), Vulgate (lat), Septuagint (gr) and greek New testament (gr), Douay-Rheims (eng) and Castellio's translation (lat, currently only Genesis and Evangelia).</p>
+<p>You can open up to five columns. In the first column, you specify the version AND the position (a book and, possibly, also a chapter) in this version you want to display. In the other columns, you select only the version. The application will load the passage in the selected version which corresponds to the passage and version specified in the first column.</p>
+<p>The different versions of the Bible vary in many places with some books/chapters/verses totaly absent in some cases (e. g. the Books of Maccabees are absent in the Hebrew version, in the Vulgate there are only two, meanwhile in the Septuagint there are four Books of Maccabees), numbered differently (e. g. the differences in the numbering of the Psalms between the Hebrew version and Vulgate/Septuagint) or displaced in different books (e. g. the Septuagint "Second book of Esdras" [ΕΣΔΡΑΣ Β'] corresponding to the Vulgate books of Esdras and Nehemias). <strong>There are many such cases and not all of them have already been processed in the program!</strong>.</p>
+</div>
+</body>
+</html>
