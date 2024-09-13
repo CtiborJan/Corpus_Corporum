@@ -1,0 +1,3 @@
+This repository contains all resources used in the Latin online meta-corpus <a href="https://mlat.uzh.ch/…pus Corporum</a>. The software has been written by Jan Ctibor (University of Prague) and is shared with a non-commercial Creative Commons license including attribution of the author (CC BY-NC). More information, especially about how to set-up a clone of Corpus Corporum will be provided at a later date. Moreover the software is constantly being improved.
+The software runs on Ubuntu server (currently 22.04). It requires PHP & Python. It includes external software: BaseX (XML Database), TreeTagger (Lemmatiser), Sphinx (Search engine).
+ 
